@@ -90,6 +90,7 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
     @Test
     @DisplayName("should display result after multiplying two positive multi-digit numbers")
     void testPositiveMultiplication() {
@@ -107,5 +108,37 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("Should display the immediate result after pressing any binary operation for the second time after two positive multi-digit numbers have been entered")
+    void testMultipleBinaryOperations(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(8);
+        calc.pressBinaryOperationKey("x");
+
+        String expected = "40";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Should display the same value as before after pressing the equals key if there is no operation key selected")
+    void testEqualsKeyWithoutOperationKey(){
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "12";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
 }
 
